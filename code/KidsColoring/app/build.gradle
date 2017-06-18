@@ -1,0 +1,51 @@
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.dynatrace.tools:android:+'
+    }
+}
+
+
+apply plugin: 'com.android.application'
+
+apply plugin: 'com.dynatrace.tools.android'
+dynatrace {
+    defaultConfig {
+        applicationId 'YOUR_ID'
+        environmentId 'YOUR_ENV'
+        cluster 'https://live.ruxit.com'
+    }
+    dependencies {
+        compile dynatrace.agent()
+    }
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
+
+    defaultConfig {
+        applicationId "at.smartlab.kids.paint"
+        minSdkVersion 13
+        targetSdkVersion 23
+        versionCode 17
+        versionName "17.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:25.0.0'
+
+}
